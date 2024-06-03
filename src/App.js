@@ -1,15 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import "./App.css";
 
-import {Navbar,Footer,Sidebar,ThemeSettings} from './components'
+import {Navbar,Footer,Sidebar,ThemeSettings} from './components';
+import { useStateContext } from './contexts/ContextProvider';
+
 
 import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
 
 const App = () => {
-  const activeMenu = true;
+  // const activeMenu = true;
+  const {   activeMenu } = useStateContext();
+
+
+  
+
   return (
     <div>
       <BrowserRouter>
@@ -26,11 +33,14 @@ const App = () => {
             </TooltipComponent>
           </div>
           {activeMenu ? (
-          <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg">
-            <Sidebar/></div> 
-          ):( 
-          <div className="w-9 dark:bg-secondary-dark-bg"><Sidebar/></div>
-           )}
+            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+              <Sidebar />
+            </div>
+          ) : (
+            <div className="w-0 dark:bg-secondary-dark-bg">
+              <Sidebar />
+            </div>
+          )}
            <div className={
                `dark:bg-main-dark-bg  bg-main-bg min-h-screen w-full ${activeMenu}?'md:ml-72':'flex-2'`
             }>
